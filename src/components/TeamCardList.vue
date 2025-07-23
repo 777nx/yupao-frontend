@@ -24,6 +24,10 @@
       </template>
       <template #footer>
         <van-button size="small" type="primary" plain @click="doJoinTeam(team.id)">加入队伍</van-button>
+        <van-button v-if="team.userId === currentUser?.id" size="small" type="primary" plain @click="doUpdateTeam(team.id)">更新队伍</van-button>
+        <!-- todo 仅加入队伍可见 -->
+        <van-button size="small" type="primary" plain @click="doQuitTeam(team.id)">退出队伍</van-button>
+        <van-button size="small" type="primary" plain @click="doDeleteTeam(team.id)">解散队伍</van-button>
       </template>
     </van-card>
   </div>
@@ -35,6 +39,9 @@ import {teamStatusEnum} from "../constants/team.ts";
 import ikun from '../assets/ikun.png'
 import myAxios from "../plugins/myAxios.ts";
 import {Toast} from "vant";
+import {onMounted, ref} from "vue";
+import {getCurrentUser} from "../services/user.ts";
+import {useRouter} from "vue-router";
 
 interface TeamCardListProps {
   teamList: teamType[];
@@ -43,6 +50,14 @@ interface TeamCardListProps {
 const props = withDefaults(defineProps<TeamCardListProps>(), {
   teamList: () => []
 });
+
+const currentUser = ref()
+
+const router = useRouter()
+
+onMounted(async () => {
+  currentUser.value = await getCurrentUser()
+})
 
 /**
  * 加入队伍
@@ -56,6 +71,49 @@ const doJoinTeam = async (id: number) => {
     Toast.success("加入成功")
   } else {
     Toast.fail("加入失败" + (res.description ? `, ${res.description}` : ""))
+  }
+}
+
+/**
+ * 跳转至更新队伍
+ * @param id
+ */
+const doUpdateTeam = (id: number) => {
+  router.push({
+    path: '/team/update',
+    query: {
+      id
+    }
+  })
+}
+
+/**
+ * 退出队伍
+ * @param id
+ */
+const doQuitTeam = async (id: number) => {
+  const res = await myAxios.post("/team/quit", {
+    teamId: id
+  })
+  if (res?.code === 0) {
+    Toast.success("退出成功")
+  } else {
+    Toast.fail("退出失败" + (res.description ? `, ${res.description}` : ""))
+  }
+}
+
+/**
+ * 解散队伍
+ * @param id
+ */
+const doDeleteTeam = async (id: number) => {
+  const res = await myAxios.post("/team/delete", {
+    id
+  })
+  if (res?.code === 0) {
+    Toast.success("解散成功")
+  } else {
+    Toast.fail("解散失败" + (res.description ? `, ${res.description}` : ""))
   }
 }
 </script>
