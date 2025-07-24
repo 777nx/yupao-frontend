@@ -31,7 +31,6 @@ onMounted(async () => {
   const res = await getCurrentUser()
   if (res) {
     user.value = res
-    Toast.success("获取用户信息成功")
   } else {
     Toast.fail("获取用户信息失败")
   }

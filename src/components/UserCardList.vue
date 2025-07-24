@@ -1,4 +1,5 @@
 <template>
+  <van-skeleton title avatar :row="16" :loading="props.loading">
   <van-card
       v-for="user in props.userList"
       :desc="user.profile"
@@ -14,6 +15,7 @@
       <van-button size="mini">联系我</van-button>
     </template>
   </van-card>
+  </van-skeleton>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +26,7 @@ interface UserCardListProps {
 }
 
 const props = withDefaults(defineProps<UserCardListProps>(), {
+  loading: true,
   userList: () => []
 });
 </script>

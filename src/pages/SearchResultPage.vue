@@ -1,5 +1,5 @@
 <template>
-  <user-card-list :userList="userList" />
+  <user-card-list :userList="userList" :loading="loading" />
   <van-empty v-if="!userList || userList.length < 1" description="搜索结果为空"></van-empty>
 </template>
 
@@ -11,12 +11,15 @@ import {Toast} from "vant";
 import qs from 'qs'
 import UserCardList from "../components/UserCardList.vue";
 
+const loading = ref(true);
+
 const route = useRoute();
 const {tags} = route.query;
 
 const userList = ref([])
 
 onMounted(async () => {
+  loading.value = true;
   const userListData = await myAxios.get('/user/search/tags',{
     withCredentials: false,
     params: {
@@ -28,7 +31,6 @@ onMounted(async () => {
   })
   .then(function (response) {
     console.log('/user/search/tags succeed',response);
-    Toast.success('请求成功');
     return response?.data;
   }).catch(function (error) {
     console.log('/user/search/tags error',error);
@@ -43,6 +45,7 @@ onMounted(async () => {
     userList.value = userListData;
     console.log(userList.value)
   }
+  loading.value = false;
 })
 
 const mockUser = {
