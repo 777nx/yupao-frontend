@@ -2,8 +2,10 @@
 //自定义实例默认值
 import axios from "axios";
 
+const isDev = process.env.NODE_ENV === 'development'
+
 const myAxios = axios.create({
-    baseURL: 'http://localhost:8080/api'
+    baseURL: isDev ? 'http://localhost:8080/api' : ''
 });
 
 myAxios.defaults.withCredentials = true;
