@@ -52,6 +52,13 @@
   resolved "https://registry.npmmirror.com/@types/estree/-/estree-1.0.8.tgz"
   integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
 
+"@types/node@^20.19.0 || >=22.12.0", "@types/node@^24.1.0":
+  version "24.1.0"
+  resolved "https://registry.npmmirror.com/@types/node/-/node-24.1.0.tgz"
+  integrity sha512-ut5FthK5moxFKH2T1CUOC6ctR67rQRvvHdFLCD2Ql6KXmMuCrjsSsRI9UsLCm9M18BMwClv4pn327UvB7eeO1w==
+  dependencies:
+    undici-types "~7.8.0"
+
 "@vant/icons@^1.8.0":
   version "1.8.0"
   resolved "https://registry.npmmirror.com/@vant/icons/-/icons-1.8.0.tgz"
@@ -787,6 +794,11 @@ ufo@^1.5.4:
   version "1.6.1"
   resolved "https://registry.npmmirror.com/ufo/-/ufo-1.6.1.tgz"
   integrity sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==
+
+undici-types@~7.8.0:
+  version "7.8.0"
+  resolved "https://registry.npmmirror.com/undici-types/-/undici-types-7.8.0.tgz"
+  integrity sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==
 
 unplugin-utils@^0.2.4:
   version "0.2.4"
