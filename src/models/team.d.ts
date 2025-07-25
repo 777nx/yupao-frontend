@@ -1,7 +1,7 @@
 /**
  * 组队类别
  */
-export type teamType ={
+export type TeamType ={
     id: number;
     name: string;
     description: string;
@@ -13,4 +13,5 @@ export type teamType ={
     createTime: Date;
     updateTime: Date;
     createUser?: UserType;
+    hasJoinNum?: number;
 }
